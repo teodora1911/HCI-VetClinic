@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="ForegroundColor">#E3F2FD</SolidColorBrush>
+    <SolidColorBrush x:Key="ForegroundNegativeColor">#0D47A1</SolidColorBrush>
+    <SolidColorBrush x:Key="PrimaryColor">#2196F3</SolidColorBrush>
+    <SolidColorBrush x:Key="SecondaryColor">#90CAF9</SolidColorBrush>
+    <SolidColorBrush x:Key="PrimaryBackgroundColor">#0D47A1</SolidColorBrush>
+    <SolidColorBrush x:Key="SecondaryBackgroundColor">#1976D2</SolidColorBrush>
+    <SolidColorBrush x:Key="ErrorColor">#EF5350</SolidColorBrush>
+
+    <Style x:Key="FontFamilyWindow" TargetType="{x:Type Window}">
+        <Setter Property="FontFamily" Value="Cambria Math" />
+        <Setter Property="FontSize" Value="18" />
+    </Style>
+</ResourceDictionary>

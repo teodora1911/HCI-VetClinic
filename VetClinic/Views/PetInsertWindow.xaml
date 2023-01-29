@@ -1,0 +1,173 @@
+﻿<Window x:Class="VetClinic.Views.PetInsertWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:VetClinic.Views"
+        mc:Ignorable="d"
+        Height="600" Width="600"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Style="{DynamicResource FontFamilyWindow}">
+    <Border CornerRadius="30" Background="{DynamicResource PrimaryBackgroundColor}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="75"/>
+            </Grid.RowDefinitions>
+
+            <TextBox Grid.Row="0"
+                     x:Name="NameTextBox"
+                     Width="500" Height="50"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Top"
+                     Margin="0,50,0,0"
+                     Style="{StaticResource MaterialDesignTextBox}"
+                     Padding="10,15,0,0"
+                     materialDesign:HintAssist.Hint="{Binding PersonNameHeader}"
+                     FontSize="17"
+                     Foreground="{DynamicResource ForegroundColor}"
+                     Background="{DynamicResource SecondaryBackgroundColor}"
+                     BorderBrush="{DynamicResource PrimaryColor}"
+                     KeyDown="TextBox_KeyDown"/>
+            <TextBox Grid.Row="0"
+                     x:Name="GenderTextBox"
+                     Width="125" Height="50"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Margin="150,150,0,0"
+                     Style="{StaticResource MaterialDesignTextBox}"
+                     Padding="10,15,0,0"
+                     materialDesign:HintAssist.Hint="{Binding GenderHeader}"
+                     FontSize="17"
+                     Foreground="{DynamicResource ForegroundColor}"
+                     Background="{DynamicResource SecondaryBackgroundColor}"
+                     BorderBrush="{DynamicResource PrimaryColor}"
+                     KeyDown="TextBox_KeyDown"/>
+            <Button Grid.Row="0"
+                    Click="ChangeGenterToFemale"
+                    Cursor="Hand"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="325,150,0,0"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Foreground="{DynamicResource PrimaryColor}"
+                    Width="50" Height="50"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Style="{StaticResource MaterialDesignPaperLightButton}">
+                <materialDesign:PackIcon Kind="GenderFemale" Height="46" Width="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+            <Button Grid.Row="0"
+                    Click="ChangeGenterToMale"
+                    Cursor="Hand"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0,150,150,0"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Foreground="{DynamicResource SecondaryColor}"
+                    Width="50" Height="50"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Style="{StaticResource MaterialDesignPaperLightButton}">
+                <materialDesign:PackIcon Kind="GenderMale" Height="46" Width="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+            <TextBox Grid.Row="0"
+                     x:Name="SpeciesTextBox"
+                     Width="300" Height="50"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Margin="50,250,0,0"
+                     Style="{StaticResource MaterialDesignTextBox}"
+                     Padding="10,15,0,0"
+                     materialDesign:HintAssist.Hint="{Binding SpeciesHeader}"
+                     FontSize="17"
+                     Foreground="{DynamicResource ForegroundColor}"
+                     Background="{DynamicResource SecondaryBackgroundColor}"
+                     BorderBrush="{DynamicResource PrimaryColor}"
+                     KeyDown="TextBox_KeyDown"/>
+            <ComboBox
+                      x:Name="SpeciesComboBox"
+                      Width="180" Height="50"
+                      HorizontalAlignment="Left"
+                      Margin="370,250,0,0"
+                      FontSize="17"
+                      Padding="10,15,10,0"
+                      Style="{StaticResource MaterialDesignComboBox}"
+                      Foreground="{DynamicResource ForegroundColor}"
+                      Background="{DynamicResource SecondaryBackgroundColor}"
+                      BorderBrush="{DynamicResource PrimaryColor}" VerticalAlignment="Top"/>
+
+            <TextBox Grid.Row="0"
+                     x:Name="BreedTextBox"
+                     Width="300" Height="50"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Margin="50,350,0,0"
+                     Style="{StaticResource MaterialDesignTextBox}"
+                     Padding="10,15,0,0"
+                     materialDesign:HintAssist.Hint="{Binding SpeciesHeader}"
+                     FontSize="17"
+                     Foreground="{DynamicResource ForegroundColor}"
+                     Background="{DynamicResource SecondaryBackgroundColor}"
+                     BorderBrush="{DynamicResource PrimaryColor}"
+                     KeyDown="TextBox_KeyDown"/>
+            <ComboBox Grid.Row="0"
+                      x:Name="BreedComboBox"
+                      Width="180" Height="50"
+                      VerticalAlignment="Top"
+                      HorizontalAlignment="Left"
+                      Margin="370,350,0,0"
+                      FontSize="17"
+                      Padding="10,15,10,0"
+                      Style="{StaticResource MaterialDesignComboBox}"
+                      Foreground="{DynamicResource ForegroundColor}"
+                      Background="{DynamicResource SecondaryBackgroundColor}"
+                      BorderBrush="{DynamicResource PrimaryColor}"/>
+
+            <Label Grid.Row="0"
+                   x:Name="BannerLabel"
+                   Width="500" Height="40"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Center"
+                   Margin="0,450,0,0"
+                   Content=""
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   Foreground="{DynamicResource PrimaryBackgroundColor}"
+                   BorderBrush="Transparent"
+                   FontSize="16"
+                   Background="{DynamicResource ErrorColor}"
+                   Visibility="Hidden"/>
+
+            <Button Grid.Row="1" Width="130" Height="45"
+                    Style="{StaticResource MouseOverButton}"
+                    Content="{Binding YesNoDialogConfirmationString}"
+                    Background="{DynamicResource SecondaryColor}"
+                    Foreground="{DynamicResource ForegroundColor}"
+                    FontSize="17"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left" Margin="100,0,0,0"
+                    Click="ConfirmButtonClick">
+            </Button>
+            <Button Grid.Row="1" Width="130" Height="45"
+                    Style="{StaticResource MouseOverButton}"
+                    Content="{Binding YesNoDialogRejectionString}"
+                    Background="{DynamicResource ErrorColor}"
+                    Foreground="{DynamicResource SecondaryBackgroundColor}"
+                    FontSize="17"
+                    FontWeight="Bold"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right" Margin="0,0,100,0"
+                    Click="RejectionButtonClick">
+            </Button>
+
+        </Grid>
+    </Border>
+</Window>

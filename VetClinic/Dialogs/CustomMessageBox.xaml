@@ -1,0 +1,40 @@
+﻿<Window x:Class="VetClinic.Dialogs.CustomMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VetClinic.Dialogs"
+        mc:Ignorable="d"
+        Height="150" Width="400"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Style="{DynamicResource FontFamilyWindow}">
+    <Border CornerRadius="10" Background="{DynamicResource SecondaryBackgroundColor}">
+        <Grid>
+            <Label x:Name="MessageLabel"
+               Background="Transparent"
+               BorderBrush="Transparent"
+               Width="350" Height="75"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Left"
+               Margin="25,25,0,0"
+               VerticalContentAlignment="Center"
+               HorizontalContentAlignment="Center"
+               Foreground="{DynamicResource ForegroundColor}"/>
+            <Button Width="80" Height="30"
+                    Style="{StaticResource MouseOverButton}"
+                    x:Name="OkButton"
+                    Background="{DynamicResource PrimaryColor}"
+                    Foreground="{DynamicResource ForegroundColor}"
+                    FontSize="15"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center" Margin="0,107,0,0"
+                    Click="OkButtonClick"
+                    Content="OK">
+            </Button>
+        </Grid>
+    </Border>
+</Window>

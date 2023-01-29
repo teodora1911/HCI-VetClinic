@@ -1,0 +1,107 @@
+﻿<Window x:Class="VetClinic.Views.ServiceDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:VetClinic.Views"
+        mc:Ignorable="d"
+        Height="600" Width="600"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Style="{DynamicResource FontFamilyWindow}">
+    <Border CornerRadius="30" Background="{DynamicResource PrimaryBackgroundColor}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="75"/>
+            </Grid.RowDefinitions>
+
+            <TextBox Grid.Row="0"
+                     x:Name="NameTextBox"
+                     Width="500" Height="50"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Top"
+                     Margin="0,50,0,0"
+                     Style="{StaticResource MaterialDesignTextBox}"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"
+                     materialDesign:HintAssist.Hint="{Binding NonPersonNameHeader}"
+                     FontSize="17"
+                     Foreground="{DynamicResource ForegroundColor}"
+                     Background="{DynamicResource SecondaryBackgroundColor}"
+                     BorderBrush="{DynamicResource PrimaryColor}"
+                     KeyDown="TextBox_KeyDown"/>
+            <TextBox Grid.Row="0"
+                     x:Name="DescriptionTextBox"
+                     Width="500" Height="150"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Top"
+                     Margin="0,125,0,0"
+                     Style="{StaticResource MaterialDesignTextBox}"
+                     Padding="15,15,15,15"
+                     materialDesign:HintAssist.Hint="{Binding DescriptionHeader}"
+                     FontSize="17"
+                     Foreground="{DynamicResource ForegroundColor}"
+                     Background="{DynamicResource SecondaryBackgroundColor}"
+                     BorderBrush="{DynamicResource PrimaryColor}"
+                     KeyDown="TextBox_KeyDown"
+                     TextWrapping="WrapWithOverflow"/>
+            <TextBox Grid.Row="0"
+                     x:Name="CostTextBox"
+                     Width="200" Height="50"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Top"
+                     Margin="0,300,0,0"
+                     Style="{StaticResource MaterialDesignTextBox}"
+                     Padding="10,15,0,0"
+                     materialDesign:HintAssist.Hint="{Binding CostHint}"
+                     FontSize="17"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     Foreground="{DynamicResource ForegroundColor}"
+                     Background="{DynamicResource SecondaryBackgroundColor}"
+                     BorderBrush="{DynamicResource PrimaryColor}"
+                     KeyDown="TextBox_KeyDown"/>
+            <Label Grid.Row="0"
+                   x:Name="BannerLabel"
+                   Width="500" Height="50"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Center"
+                   Margin="0,425,0,0"
+                   Content=""
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   Foreground="{DynamicResource PrimaryBackgroundColor}"
+                   BorderBrush="Transparent"
+                   FontSize="17"
+                   Background="{DynamicResource ErrorColor}"
+                   Visibility="Hidden"/>
+
+            <Button Grid.Row="1" Width="130" Height="45"
+                    Style="{StaticResource MouseOverButton}"
+                    Content="{Binding YesNoDialogConfirmationString}"
+                    Background="{DynamicResource SecondaryColor}"
+                    Foreground="{DynamicResource ForegroundColor}"
+                    FontSize="17"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left" Margin="100,0,0,0"
+                    Click="ConfirmButtonClick">
+            </Button>
+            <Button Grid.Row="1" Width="130" Height="45"
+                    Style="{StaticResource MouseOverButton}"
+                    Content="{Binding YesNoDialogRejectionString}"
+                    Background="{DynamicResource ErrorColor}"
+                    Foreground="{DynamicResource SecondaryBackgroundColor}"
+                    FontSize="17"
+                    FontWeight="Bold"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right" Margin="0,0,100,0"
+                    Click="RejectionButtonClick">
+            </Button>
+        </Grid>
+    </Border>
+</Window>
