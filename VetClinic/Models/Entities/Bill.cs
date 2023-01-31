@@ -12,7 +12,7 @@ namespace VetClinic.Models.Entities
         public decimal Price { get; set; }
         public DateTime Timestamp { get; set; }
         public string Payment { get; set; }
-        public Examination Examination { get; set; }
-        public PetOwner Owner { get; set; }
+        public int Examination { get; set; }
+        public int Owner { get; set; }
     }
 }

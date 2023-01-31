@@ -302,7 +302,9 @@ namespace VetClinic.Dao.MySqlDao
                     if (((int)Command.LastInsertedId) > 0)
                     {
                         Command = Connection.CreateCommand();
-                        Command.CommandText = "UPDATE appointment set scheduled=true WHERE id=" + appointment.Id;
+                        Command.CommandText = "UPDATE appointment set scheduled=true, datetime=@date WHERE id=" + appointment.Id;
+                        Command.Parameters.Clear();
+                        Command.Parameters.AddWithValue("@date", appointment.DateTime);
                         return Command.ExecuteNonQuery() > 0;
                     }
                     else return false;

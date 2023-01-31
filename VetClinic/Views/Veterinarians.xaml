@@ -36,7 +36,7 @@
                          VerticalContentAlignment="Center"
                          Margin="25,0,0,0"
                          Style="{StaticResource MaterialDesignTextBox}"
-                         materialDesign:HintAssist.Hint="{Binding Language.PersonSearchString}" 
+                         materialDesign:HintAssist.Hint="{Binding Language.PersonFullNameHeader}" 
                          KeyDown="SearchTextBox_KeyDown"/>
                 <Button  Background="{DynamicResource PrimaryColor}"
                          BorderBrush="Transparent"

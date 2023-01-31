@@ -60,6 +60,7 @@
                     Width="50" Height="50"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
+                    ToolTip="{Binding GenderFemale}"
                     Style="{StaticResource MaterialDesignPaperLightButton}">
                 <materialDesign:PackIcon Kind="GenderFemale" Height="46" Width="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
@@ -75,6 +76,7 @@
                     Width="50" Height="50"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
+                    ToolTip="{Binding GenderMale}"
                     Style="{StaticResource MaterialDesignPaperLightButton}">
                 <materialDesign:PackIcon Kind="GenderMale" Height="46" Width="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
@@ -112,7 +114,7 @@
                      Margin="50,350,0,0"
                      Style="{StaticResource MaterialDesignTextBox}"
                      Padding="10,15,0,0"
-                     materialDesign:HintAssist.Hint="{Binding SpeciesHeader}"
+                     materialDesign:HintAssist.Hint="{Binding BreedHeader}"
                      FontSize="17"
                      Foreground="{DynamicResource ForegroundColor}"
                      Background="{DynamicResource SecondaryBackgroundColor}"
@@ -162,7 +164,6 @@
                     Background="{DynamicResource ErrorColor}"
                     Foreground="{DynamicResource SecondaryBackgroundColor}"
                     FontSize="17"
-                    FontWeight="Bold"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right" Margin="0,0,100,0"
                     Click="RejectionButtonClick">

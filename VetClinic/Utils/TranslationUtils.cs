@@ -17,6 +17,9 @@ namespace VetClinic.Utils
         public string PetAndOwnersButton { get; set; }
         public string VeterinariansButton { get; set; }
 
+        public string VetAppointmentsButton { get; set; }
+        public string ExaminationsButton { get; set; }
+
         public string SearchString { get; set; }
         public string PersonSearchString { get; set; }
         public string PetSearchString { get; set; }
@@ -32,6 +35,8 @@ namespace VetClinic.Utils
         public string GenderFemale { get; set; }
         public string ScheduledString { get; set; }
         public string NonScheduledString { get; set; }
+        public string CompletedString { get; set; }
+        public string NonCompletedString { get; set; }
 
         // Data Grids Column Headers
         public string IdHeader { get; set; }
@@ -61,6 +66,9 @@ namespace VetClinic.Utils
         public string VetAppExamHeader { get; set; }
         public string AddressHeader { get; set; }
 
+        public string DateHint { get; set; }
+        public string TimeHint { get; set; }
+
         // Dialogs Messages
         public string DeleteConfirmationString { get; set; }
         public string YesNoDialogConfirmationString { get; set; }
@@ -70,6 +78,7 @@ namespace VetClinic.Utils
         public string DecimalStringFormatException { get; set; }
         public string InternalServerError { get; set; }
         public string AppointmentIsScheduled { get; set; }
+        public string ScheduleAppointmentConfirmationString { get; set; }
 
         public static Lang SerbianLang = new Lang()
         {
@@ -106,7 +115,7 @@ namespace VetClinic.Utils
             ServiceSearchString = "Npr. Hirurgija",
             CostHint = "Npr. 123.456,99",
             DecimalStringFormatException = "Niste unijeli ispravan format broja. Pokušajte npr. 123.456,99",
-            PersonFullNameHeader = "Ime i prezime",
+            PersonFullNameHeader = "Ime & prezime",
             EstimatedAgeHeader = "Starost [u mjesecima]",
             WeightHeader = "Težina",
             GenderHeader = "Pol",
@@ -125,7 +134,14 @@ namespace VetClinic.Utils
             OwnerAppExamHeader = "Vlasnik",
             VetAppExamHeader = "Veterinar",
             AppointmentIsScheduled = "Pregled je već zakazan.",
-            AddressHeader = "Adresa"
+            AddressHeader = "Adresa",
+            ExaminationsButton = "Pregledi",
+            VetAppointmentsButton = "Pregledi na čekanju",
+            ScheduleAppointmentConfirmationString = "Zakaži",
+            DateHint = "Datum",
+            TimeHint = "Vrijeme",
+            CompletedString = "Završen",
+            NonCompletedString = "Zakazan"
         };
 
         public static Lang EnglishLang = new Lang()
@@ -163,7 +179,7 @@ namespace VetClinic.Utils
             ServiceSearchString = "e.g. Therapy",
             CostHint = "e.g. 123.456,99",
             DecimalStringFormatException = "Bad decimal number format.Try, for example, 123.456,99",
-            PersonFullNameHeader = "Name and Surname",
+            PersonFullNameHeader = "Name & Surname",
             EstimatedAgeHeader = "Age [in months]",
             WeightHeader = "Weight",
             GenderHeader = "Gender",
@@ -182,7 +198,14 @@ namespace VetClinic.Utils
             OwnerAppExamHeader = "Owner",
             VetAppExamHeader = "Veterinarian",
             AppointmentIsScheduled = "Appointment is already scheduled.",
-            AddressHeader = "Address"
+            AddressHeader = "Address",
+            ExaminationsButton = "Examinations",
+            VetAppointmentsButton = "Appointments on Hold",
+            ScheduleAppointmentConfirmationString = "Schedule",
+            DateHint = "Date",
+            TimeHint = "Time",
+            CompletedString = "Completed",
+            NonCompletedString = "Scheduled"
         };
     }
 }

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:VetClinic"
         mc:Ignorable="d"
         Height="600" Width="600"
@@ -12,7 +13,7 @@
         AllowsTransparency="True"
         Background="Transparent"
         Style="{DynamicResource FontFamilyWindow}">
-    <Border CornerRadius="20" Background="{DynamicResource BorderBackgroundColor}">
+    <Border CornerRadius="30" Background="{DynamicResource PrimaryBackgroundColor}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="75"/>
@@ -100,6 +101,46 @@
                         </Style>
                     </Button.Resources>
                 </Button>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Button Content="{Binding VetAppointmentsButton}"
+                        Width="300" Height="50"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        Margin="0,125,0,0"
+                        Foreground="{DynamicResource ForegroundColor}"
+                        Background="{DynamicResource PrimaryColor}"
+                        BorderBrush="Transparent"
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        Style="{StaticResource MaterialDesignFlatButton}" FontSize="18"
+                        Click="OpenAppointmentsView"/>
+                <Button Content="{Binding ExaminationsButton}"
+                        Width="300" Height="50"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        Foreground="{DynamicResource ForegroundColor}"
+                        Background="{DynamicResource PrimaryColor}"
+                        BorderBrush="Transparent"
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        Style="{StaticResource MaterialDesignFlatButton}" FontSize="18"
+                        Click="OpenExaminationsView"/>
+                <Button Content="{Binding LogoutButton}"
+                        Width="300" Height="50"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        Margin="0,0,0,125"
+                        Foreground="{DynamicResource ForegroundColor}"
+                        Background="{DynamicResource PrimaryColor}"
+                        BorderBrush="Transparent"
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        Style="{StaticResource MaterialDesignFlatButton}" FontSize="18"
+                        Click="Logout"/>
             </Grid>
         </Grid>
     </Border>

@@ -103,19 +103,27 @@ namespace VetClinic.Views
 
         private void CloseButtonClick(object sender, RoutedEventArgs e) => this.Close();
 
-        private void AppointmentsDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (AdminView)
-            {
-                OpenAppointmentDetailsWindow(AppointmentViewModel.SelectedItem);
-            }
-        }
+        private void AppointmentsDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) => UpdateAppointmentClick();
 
-        private void AppointmentUpdateClick(object sender, RoutedEventArgs e)
+        private void AppointmentUpdateClick(object sender, RoutedEventArgs e) => UpdateAppointmentClick();
+
+        private void UpdateAppointmentClick()
         {
-            if (AdminView)
-            {
+            if(AdminView)
                 OpenAppointmentDetailsWindow(AppointmentViewModel.SelectedItem);
+            else
+            {
+                if(AppointmentViewModel.SelectedItem is not null)
+                {
+                    if (AppointmentViewModel.SelectedItem.IsScheduled)
+                        OpenAppointmentDetailsWindow(AppointmentViewModel.SelectedItem);
+                    else
+                    {
+                        ApproveSchedulingAppointment Approving = new ApproveSchedulingAppointment(Translation, AppointmentViewModel.SelectedItem);
+                        if (Approving.ShowDialog() == true)
+                            Search();
+                    }
+                }
             }
         }
 
@@ -127,10 +135,14 @@ namespace VetClinic.Views
                     new CustomMessageBox(Translation.Language.AppointmentIsScheduled).Show();
                 else
                 {
-                    if (!AppointmentDao.DeleteById(AppointmentViewModel.SelectedItem.Id))
-                        new CustomMessageBox(Translation.Language.InternalServerError).Show();
-                    else
-                        Search();
+                    YesNo YesNoDialog = new YesNo(Translation.Language.DeleteConfirmationString, Translation.Language.YesNoDialogConfirmationString, Translation.Language.YesNoDialogRejectionString);
+                    if (YesNoDialog.ShowDialog() == true)
+                    {
+                        if (!AppointmentDao.DeleteById(AppointmentViewModel.SelectedItem.Id))
+                            new CustomMessageBox(Translation.Language.InternalServerError).Show();
+                        else
+                            Search();
+                    }
                 }
             }
         }

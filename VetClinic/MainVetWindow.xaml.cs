@@ -12,8 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using VetClinic.Dao;
+using VetClinic.Dialogs;
 using VetClinic.Models.Entities;
 using VetClinic.Utils;
+using VetClinic.Views;
 
 namespace VetClinic
 {
@@ -50,9 +52,7 @@ namespace VetClinic
             // Change Language In Database
             Veterinarian.User.Language = lang;
             if (!VeterinarianDao.Update(this.Veterinarian))
-            {
-                // Show Error Message
-            }
+                new CustomMessageBox(Translation.Language.InternalServerError).Show();
         }
 
         private void ChangeThemeToDark(object sender, RoutedEventArgs e) => ChangeTheme("dark");
@@ -75,9 +75,17 @@ namespace VetClinic
             // Change Theme In Database
             Veterinarian.User.Theme = theme;
             if (!VeterinarianDao.Update(this.Veterinarian))
-            {
-                // Error Message
-            }
+                new CustomMessageBox(Translation.Language.InternalServerError).Show();
+        }
+
+        private void OpenAppointmentsView(object sender, RoutedEventArgs e) => new Appointments(Translation, Veterinarian).Show();
+
+        private void OpenExaminationsView(object sender, RoutedEventArgs e) => new Examinations(Translation, Veterinarian).Show();
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            new Login().Show();
+            Close();
         }
     }
 }

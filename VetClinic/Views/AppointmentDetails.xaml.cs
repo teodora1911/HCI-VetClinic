@@ -106,6 +106,7 @@ namespace VetClinic.Views
             ScheduledLabel.Content = Translation.Language.AppointmentIsScheduled + " " + Appointment?.DateTime.ToString();
             ScheduledLabel.Visibility = Visibility.Visible;
 
+            ReasonTextBox.Text = Appointment?.Reason;
             ReasonTextBox.IsReadOnly = true;
 
             OwnersComboBox.Visibility = Visibility.Hidden;

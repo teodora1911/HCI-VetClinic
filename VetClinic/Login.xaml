@@ -101,17 +101,38 @@
                     HorizontalContentAlignment="Center"
                     FontFamily="Tahoma" FontSize="25"
                     Margin="0,490,0,0"
-                    BorderBrush="#B00020"
+                    BorderBrush="DarkBlue"
                     BorderThickness="2"
                     Background="Transparent"
-                    Foreground="#B00020"  
+                    Foreground="DarkBlue"  
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Click="LoginUser">
-                <materialDesign:PackIcon Kind="LoginVariant"
+                <materialDesign:PackIcon Kind="ArrowRight"
                                          Height="48" Width="32"
                                          VerticalAlignment="Center"
                                          HorizontalAlignment="Center"
-                                         Foreground="#B00020"></materialDesign:PackIcon>
+                                         Foreground="DarkBlue"></materialDesign:PackIcon>
+            </Button>
+
+            <Button Cursor="Hand"
+                    x:Name="CloseButton"
+                    Width="50" Height="50"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    FontFamily="Tahoma" FontSize="25"
+                    Margin="530,10,0,0"
+                    BorderBrush="Transparent"
+                    Background="Transparent"
+                    Foreground="#B00020"  
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Click="CloseApp">
+                <materialDesign:PackIcon Kind="Close"
+                                         Height="48" Width="32"
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Center"
+                                         Foreground="#B00020" />
             </Button>
         </Grid>
     </Border>

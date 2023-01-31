@@ -91,7 +91,6 @@
                     Background="{DynamicResource ErrorColor}"
                     Foreground="{DynamicResource SecondaryBackgroundColor}"
                     FontSize="17"
-                    FontWeight="Bold"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right" Margin="0,0,100,0"
                     Click="RejectionButtonClick">

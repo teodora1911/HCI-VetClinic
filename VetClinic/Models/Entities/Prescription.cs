@@ -8,7 +8,7 @@ namespace VetClinic.Models.Entities
 {
     public class Prescription
     {
-        public Examination Examination { get; set; }
+        public int Examination { get; set; }
         public Medicine Medicine { get; set; }
         public string Name { get; set; }
         public int Dose { get; set; }

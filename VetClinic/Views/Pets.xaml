@@ -36,7 +36,7 @@
                          VerticalContentAlignment="Center"
                          Margin="25,0,0,0"
                          Style="{StaticResource MaterialDesignTextBox}"
-                         materialDesign:HintAssist.Hint="{Binding Language.PetSearchString}" 
+                         materialDesign:HintAssist.Hint="{Binding Language.PersonNameHeader}" 
                          KeyDown="SearchTextBox_KeyDown"/>
                 <ComboBox x:Name="SpeciesComboBox"
                           Width="200" Height="50"

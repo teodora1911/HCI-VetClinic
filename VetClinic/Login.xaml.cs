@@ -102,5 +102,7 @@ namespace VetClinic
 
             return translation;
         }
+
+        private void CloseApp(object sender, RoutedEventArgs e) => Close();
     }
 }

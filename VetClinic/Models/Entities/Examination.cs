@@ -28,7 +28,7 @@ namespace VetClinic.Models.Entities
 
     public class ExaminationService
     {
-        public Examination Examination { get; set; }
+        public int Examination { get; set; }
         public Service Service { get; set; }
         public int Quantity { get; set; }
         public decimal Cost { get; set; }

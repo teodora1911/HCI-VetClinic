@@ -36,7 +36,7 @@
                          VerticalContentAlignment="Center"
                          Margin="25,0,0,0"
                          Style="{StaticResource MaterialDesignTextBox}"
-                         materialDesign:HintAssist.Hint="{Binding Language.MedicineSearchString}" 
+                         materialDesign:HintAssist.Hint="{Binding Language.NonPersonNameHeader}" 
                          KeyDown="SearchTextBox_KeyDown"/>
                 <ComboBox x:Name="MedicineTypeComboBox"
                           Width="400" Height="50"
@@ -47,6 +47,7 @@
                           Style="{StaticResource MaterialDesignComboBox}"
                           Background="{DynamicResource SecondaryBackgroundColor}"
                           Foreground="{DynamicResource ForegroundColor}"
+                          materialDesign:HintAssist.Hint="{Binding Language.TypeHeader}"
                           BorderBrush="Transparent"
                           Padding="10,0,10,0"/>
                 <Button  Background="{DynamicResource PrimaryColor}"
