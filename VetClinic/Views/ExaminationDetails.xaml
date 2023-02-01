@@ -1,0 +1,343 @@
+﻿<Window x:Class="VetClinic.Views.ExaminationDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:VetClinic.Views"
+        mc:Ignorable="d"
+        Height="600" Width="1500"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Style="{DynamicResource FontFamilyWindow}">
+    <Border CornerRadius="30" Background="{DynamicResource PrimaryBackgroundColor}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="75"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0"
+                   x:Name="DateTimeLabel"
+                   Width="400" Height="50"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Margin="25,0,0,0"
+                   Content=""
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   FontSize="17"
+                   Foreground="{DynamicResource ForegroundColor}"
+                   Background="{DynamicResource SecondaryBackgroundColor}"
+                   BorderBrush="{DynamicResource PrimaryColor}"/>
+
+            <Label Grid.Row="0"
+                   x:Name="AddressLabel"
+                   Width="400" Height="50"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Margin="450,0,0,0"
+                   Content=""
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   FontSize="17"
+                   Foreground="{DynamicResource ForegroundColor}"
+                   Background="{DynamicResource SecondaryBackgroundColor}"
+                   BorderBrush="{DynamicResource PrimaryColor}"/>
+
+            <Button Grid.Row="0" Width="250" Height="50"
+                    x:Name="PetDetailsButton"
+                    Style="{StaticResource MouseOverButton}"
+                    Content="{Binding YesNoDialogRejectionString}"
+                    Background="{DynamicResource ErrorColor}"
+                    Foreground="{DynamicResource SecondaryBackgroundColor}"
+                    FontSize="17"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left" Margin="875,0,0,0"
+                    Click="ShowPetDetails">
+            </Button>
+            <Button Grid.Row="0"  
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Foreground="{DynamicResource ErrorColor}"
+                    materialDesign:ButtonAssist.CornerRadius="30" 
+                    Cursor="Hand"  
+                    Style="{StaticResource MaterialDesignPaperLightButton}" 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="1430,0,0,0"
+                    FontSize="16"
+                    Height="50" Width="45"
+                    ToolTip="{Binding Language.CloseWindowString}" 
+                    Click="CloseButtonClick">
+                <materialDesign:PackIcon Kind="Close" Height="28" Width="32" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+
+            <Grid Grid.Row="1">
+                <DataGrid x:Name="ServicesDataGrid"
+                          Cursor="Hand"
+                          ItemsSource="{Binding ServiceItems}" 
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          SelectedItem="{Binding ServiceSelectedItem}"
+                          Background="Transparent"
+                          Foreground="{DynamicResource ForegroundColor}"
+                          VerticalContentAlignment="Center"
+                          HorizontalContentAlignment="Center"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          FontSize="16"
+                          Margin="10,10,0,0"
+                          Width="700" Height="200">
+
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="FontSize" Value="18"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="15,0,0,0"/>
+                            <Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource SecondaryBackgroundColor}"/>
+                            <Setter Property="Height" Value="50"/>
+                        </Style>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="FontSize" Value="17"/>
+                            <Setter Property="Height" Value="50"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="ServiceNameColumn" Width="*" IsReadOnly="True" Binding="{Binding Name}" />
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Click="AddSelectedService" Cursor="Hand"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            Foreground="{DynamicResource PrimaryColor}"
+                                            Width="50" Height="50"
+                                            VerticalContentAlignment="Center"
+                                            HorizontalContentAlignment="Center"
+                                            Style="{StaticResource MaterialDesignPaperLightButton}">
+                                        <materialDesign:PackIcon Kind="Add" Height="46" Width="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <DataGrid x:Name="MedicineDataGrid"
+                          Cursor="Hand"
+                          ItemsSource="{Binding MedicineItems}" 
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          SelectedItem="{Binding MedicineSelectedItem}"
+                          Background="Transparent"
+                          Foreground="{DynamicResource ForegroundColor}"
+                          VerticalContentAlignment="Center"
+                          HorizontalContentAlignment="Center"
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Top"
+                          FontSize="16"
+                          Margin="0,10,10,0"
+                          Width="700" Height="200"
+                          MouseDoubleClick="MedicineDataGrid_MouseDoubleClick">
+
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="FontSize" Value="18"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="15,0,0,0"/>
+                            <Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource SecondaryBackgroundColor}"/>
+                            <Setter Property="Height" Value="50"/>
+                        </Style>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="FontSize" Value="17"/>
+                            <Setter Property="Height" Value="50"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="MedicineNameColumn" Width="*" IsReadOnly="True" Binding="{Binding Name}" />
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Click="AddSelectedMedicine" Cursor="Hand"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            Foreground="{DynamicResource PrimaryColor}"
+                                            Width="50" Height="50"
+                                            VerticalContentAlignment="Center"
+                                            HorizontalContentAlignment="Center"
+                                            Style="{StaticResource MaterialDesignPaperLightButton}">
+                                        <materialDesign:PackIcon Kind="Add" Height="46" Width="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <DataGrid x:Name="ExaminationServiceDataGrid"
+                          Cursor="Hand"
+                          ItemsSource="{Binding ExaminationServiceItems}" 
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          SelectedItem="{Binding ExaminationServiceSelectedItem}"
+                          Background="Transparent"
+                          Foreground="{DynamicResource ForegroundColor}"
+                          VerticalContentAlignment="Center"
+                          HorizontalContentAlignment="Center"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Bottom"
+                          FontSize="16"
+                          Margin="10,0,0,10"
+                          Width="700" Height="200">
+
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="FontSize" Value="18"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="15,0,0,0"/>
+                            <Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource SecondaryBackgroundColor}"/>
+                            <Setter Property="Height" Value="50"/>
+                        </Style>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="FontSize" Value="17"/>
+                            <Setter Property="Height" Value="50"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="ExaminationServiceNameColumn" Width="*" IsReadOnly="True" Binding="{Binding Service.Name}" />
+                        <DataGridTextColumn x:Name="ExaminationServiceQuantityColumn" Width="*" IsReadOnly="True" Binding="{Binding Quantity}" />
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Click="RemoveSelectedExaminationService" Cursor="Hand"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            Foreground="{DynamicResource PrimaryColor}"
+                                            Width="50" Height="50"
+                                            VerticalContentAlignment="Center"
+                                            HorizontalContentAlignment="Center"
+                                            Style="{StaticResource MaterialDesignPaperLightButton}">
+                                        <materialDesign:PackIcon Kind="Trash" Height="46" Width="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <DataGrid x:Name="PrescriptionDataGrid"
+                          Cursor="Hand"
+                          ItemsSource="{Binding PrescriptionItems}" 
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          SelectedItem="{Binding PrescriptionSelectedItem}"
+                          Background="Transparent"
+                          Foreground="{DynamicResource ForegroundColor}"
+                          VerticalContentAlignment="Center"
+                          HorizontalContentAlignment="Center"
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Bottom"
+                          FontSize="16"
+                          Margin="0,0,10,10"
+                          Width="700" Height="200"
+                          MouseDoubleClick="PrescriptionDataGrid_MouseDoubleClick">
+
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="FontSize" Value="18"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="15,0,0,0"/>
+                            <Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource SecondaryBackgroundColor}"/>
+                            <Setter Property="Height" Value="50"/>
+                        </Style>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="FontSize" Value="17"/>
+                            <Setter Property="Height" Value="50"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="PrescriptionNameColumn" Width="*" IsReadOnly="True" Binding="{Binding Name}" />
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Click="UpdateSelectedPrescription" Cursor="Hand"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            Foreground="{DynamicResource PrimaryColor}"
+                                            Width="50" Height="50"
+                                            VerticalContentAlignment="Center"
+                                            HorizontalContentAlignment="Center"
+                                            Style="{StaticResource MaterialDesignPaperLightButton}">
+                                        <materialDesign:PackIcon Kind="Update" Height="46" Width="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Click="RemoveSelectedPrescription" Cursor="Hand"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            Foreground="{DynamicResource PrimaryColor}"
+                                            Width="50" Height="50"
+                                            VerticalContentAlignment="Center"
+                                            HorizontalContentAlignment="Center"
+                                            Style="{StaticResource MaterialDesignPaperLightButton}">
+                                        <materialDesign:PackIcon Kind="Trash" Height="46" Width="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Button  Background="{DynamicResource SecondaryColor}"
+                         BorderBrush="Transparent"
+                         Foreground="{DynamicResource ForegroundNegativeColor}"
+                         materialDesign:ButtonAssist.CornerRadius="30" 
+                         Cursor="Hand"  
+                         Style="{StaticResource MaterialDesignPaperLightButton}" 
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Right"
+                         Margin="0,0,25,0"
+                         FontSize="14"
+                         Height="50" Width="50"
+                         Click="CompleteExamination">
+                    <materialDesign:PackIcon Kind="Done" Height="46" Width="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

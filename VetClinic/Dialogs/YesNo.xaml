@@ -14,7 +14,7 @@
         Style="{DynamicResource FontFamilyWindow}">
     <Border CornerRadius="10" Background="{DynamicResource SecondaryBackgroundColor}">
         <Grid>
-            <Label x:Name="MessageLabel"
+            <TextBox x:Name="MessageTextBox"
                Background="Transparent"
                BorderBrush="Transparent"
                Width="350" Height="75"
@@ -23,7 +23,8 @@
                Margin="25,25,0,0"
                VerticalContentAlignment="Center"
                HorizontalContentAlignment="Center"
-               Foreground="{DynamicResource ForegroundColor}"/>
+               Foreground="{DynamicResource ForegroundColor}"
+               TextWrapping="WrapWithOverflow"/>
             <Button Width="80" Height="30"
                     Style="{StaticResource MouseOverButton}"
                     x:Name="ConfirmationButton"

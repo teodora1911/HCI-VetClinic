@@ -20,7 +20,8 @@ namespace VetClinic.Dialogs
         public YesNo(string message, string confirmation, string rejection)
         {
             InitializeComponent();
-            MessageLabel.Content = message;
+            MessageTextBox.Text = message;
+            MessageTextBox.IsReadOnly = true;
             ConfirmationButton.Content = confirmation;
             RejectionButton.Content = rejection;
         }

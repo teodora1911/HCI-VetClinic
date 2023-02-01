@@ -16,9 +16,9 @@ namespace VetClinic.Utils
         public string ServicesButton { get; set; }
         public string PetAndOwnersButton { get; set; }
         public string VeterinariansButton { get; set; }
-
         public string VetAppointmentsButton { get; set; }
         public string ExaminationsButton { get; set; }
+        public string PrescriptionsButton { get; set; }
 
         public string SearchString { get; set; }
         public string PersonSearchString { get; set; }
@@ -37,6 +37,9 @@ namespace VetClinic.Utils
         public string NonScheduledString { get; set; }
         public string CompletedString { get; set; }
         public string NonCompletedString { get; set; }
+        public string CashPayment { get; set; }
+        public string CardPayment { get; set; }
+        public string PaymentType { get; set; }
 
         // Data Grids Column Headers
         public string IdHeader { get; set; }
@@ -65,6 +68,12 @@ namespace VetClinic.Utils
         public string OwnerAppExamHeader { get; set; }
         public string VetAppExamHeader { get; set; }
         public string AddressHeader { get; set; }
+        public string QuantityHeader { get; set; }
+
+        public string InstructionsHeader { get; set; }
+        public string DoseHeader { get; set; }
+        public string FrequencyHeader { get; set; }
+        public string DurationHeader { get; set; }
 
         public string DateHint { get; set; }
         public string TimeHint { get; set; }
@@ -76,9 +85,12 @@ namespace VetClinic.Utils
         public string EmptyFieldsErrorMessage { get; set; }
         public string UsernameIsNotAvailable { get; set; }
         public string DecimalStringFormatException { get; set; }
+        public string NaturalNumberStringFormatException { get; set; }
         public string InternalServerError { get; set; }
         public string AppointmentIsScheduled { get; set; }
         public string ScheduleAppointmentConfirmationString { get; set; }
+        public string CloseEditingConfirmationString { get; set; }
+        public string NotFoundExceptionMessage { get; set; }
 
         public static Lang SerbianLang = new Lang()
         {
@@ -141,7 +153,19 @@ namespace VetClinic.Utils
             DateHint = "Datum",
             TimeHint = "Vrijeme",
             CompletedString = "Završen",
-            NonCompletedString = "Zakazan"
+            NonCompletedString = "Zakazan",
+            QuantityHeader = "Količina",
+            CloseEditingConfirmationString = "Da li želite da završite pregled?",
+            InstructionsHeader = "Instrukcije za primjenu",
+            DoseHeader = "Doza",
+            FrequencyHeader = "Učestalost",
+            DurationHeader = "Vremenski period",
+            NaturalNumberStringFormatException = "Molimo Vas unesite prirodan broj.",
+            PrescriptionsButton = "Recepti",
+            CashPayment = "Gotovina",
+            CardPayment = "Kreditna kartica",
+            PaymentType = "Način plaćanja",
+            NotFoundExceptionMessage = "Podaci nisu pronađeni."
         };
 
         public static Lang EnglishLang = new Lang()
@@ -205,7 +229,19 @@ namespace VetClinic.Utils
             DateHint = "Date",
             TimeHint = "Time",
             CompletedString = "Completed",
-            NonCompletedString = "Scheduled"
+            NonCompletedString = "Scheduled",
+            QuantityHeader = "Quantity",
+            CloseEditingConfirmationString = "Do you want to complete this examination?",
+            InstructionsHeader = "Instructions",
+            DoseHeader = "Dose",
+            FrequencyHeader = "Frequency",
+            DurationHeader = "Duration",
+            NaturalNumberStringFormatException = "Please enter natural number.",
+            PrescriptionsButton = "Prescriptions",
+            CashPayment = "Cash",
+            CardPayment = "Credit Card",
+            PaymentType = "Payment Type",
+            NotFoundExceptionMessage = "Data not Found (404)"
         };
     }
 }

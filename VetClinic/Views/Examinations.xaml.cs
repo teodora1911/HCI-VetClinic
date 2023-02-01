@@ -15,6 +15,7 @@ using VetClinic.Utils;
 using VetClinic.Models.Entities;
 using VetClinic.Dao;
 using System.Collections.ObjectModel;
+using VetClinic.Dialogs;
 
 namespace VetClinic.Views
 {
@@ -92,19 +93,39 @@ namespace VetClinic.Views
 
         private void CloseButtonClick(object sender, RoutedEventArgs e) => this.Close();
 
-        private void ExaminationsDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
+        private void ExaminationsDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) => UpadateSelectedExamination();
 
+        private void ExaminationUpdateClick(object sender, RoutedEventArgs e) => UpadateSelectedExamination();
+
+        private void UpadateSelectedExamination()
+        {
+            if ((ExaminationViewModel.SelectedItem is not null)) {
+                if (!ExaminationViewModel.SelectedItem.IsCompleted)
+                {
+                    if (new ExaminationDetails(Translation, ExaminationViewModel.SelectedItem).ShowDialog() == true)
+                        Search();
+                }
+                else
+                {
+                    new CompletedExaminationView(Translation, ExaminationViewModel.SelectedItem).Show();
+                }
+            }
         }
 
-        private void ExaminationUpdateClick(object sender, RoutedEventArgs e)
+        private void DeleteExaminationClick(object sender, RoutedEventArgs e)
         {
-
+            if(ExaminationViewModel.SelectedItem is not null)
+            {
+                YesNo YesNoDialog = new YesNo(Translation.Language.DeleteConfirmationString, Translation.Language.YesNoDialogConfirmationString, Translation.Language.YesNoDialogRejectionString);
+                if (YesNoDialog.ShowDialog() == true)
+                {
+                    if (ExaminationDao.DeleteById(ExaminationViewModel.SelectedItem.Id))
+                        Search();
+                    else new CustomMessageBox(Translation.Language.InternalServerError).Show();
+                }
+            }
         }
 
-        private void AddExaminationClick(object sender, RoutedEventArgs e)
-        {
-
-        }
+        //private void AddExaminationClick(object sender, RoutedEventArgs e) { }
     }
 }

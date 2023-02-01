@@ -170,12 +170,12 @@ namespace VetClinic.Views
                     BirthdateDatePicker.BorderBrush = Application.Current.Resources["ErrorColor"] as SolidColorBrush;
                     return 1;
                 }*/
-                if(!string.IsNullOrEmpty(AgeTextBox.Text) && int.Parse(AgeTextBox.Text) <= 0)
+                if(string.IsNullOrEmpty(AgeTextBox.Text) && int.Parse(AgeTextBox.Text) <= 0)
                 {
                     AgeTextBox.BorderBrush = Application.Current.Resources["ErrorColor"] as SolidColorBrush;
                     return 2;
                 }
-                if(!string.IsNullOrEmpty(AgeTextBox.Text) && decimal.Parse(WeightTextBox.Text) <= 0)
+                if(string.IsNullOrEmpty(AgeTextBox.Text) && decimal.Parse(WeightTextBox.Text) <= 0)
                 {
                     WeightTextBox.BorderBrush = Application.Current.Resources["ErrorColor"] as SolidColorBrush;
                     return 2;

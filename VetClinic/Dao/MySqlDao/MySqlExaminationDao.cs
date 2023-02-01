@@ -24,13 +24,15 @@ namespace VetClinic.Dao.MySqlDao
         private IAppointmentDao AppDao = DaoFactory.Instance(DaoType.MySql).Appointments;
         private IServiceDao ServiceDao = DaoFactory.Instance(DaoType.MySql).Services;
         private IMedicineDao MedicineDao = DaoFactory.Instance(DaoType.MySql).Medicine;
+        private IPetOwnerDao OwnerDao = DaoFactory.Instance(DaoType.MySql).PetOwners;
 
-        private static readonly string SelectAll = "SELECT * FROM examination ORDER BY datetime";
-        private static readonly string SelectById = "SELECT * FROM examination WHERE id=@id ORDER BY datetime";
-        private static readonly string SelectByVeterinarianId = "SELECT * FROM examination WHERE vet=@vet ORDER BY datetime";
+        private static readonly string SelectAll = "SELECT * FROM examination WHERE deleted=false ORDER BY datetime";
+        private static readonly string SelectById = "SELECT * FROM examination WHERE id=@id AND deleted=false ORDER BY datetime";
+        private static readonly string SelectByVeterinarianId = "SELECT * FROM examination WHERE vet=@vet AND deleted=false ORDER BY datetime";
         private static readonly string InsertWithAppointment = "INSERT INTO examination(datetime, address, pet, vet, appointment) VALUES(@date, @address, @pet, @vet, @appointment)";
         private static readonly string InsertWithoutAppointment = "INSERT INTO examination(datetime, address, pet, vet) VALUES (@date, @address, @pet, @vet)";
-        private static readonly string CompleteAppointment = "UPDATE examination set completed=@completed WHERE id=@id";
+        private static readonly string CompleteExamination = "UPDATE examination SET completed=true WHERE id=@id";
+        private static readonly string DeleteExamination = "UPDATE examination SET deleted=true WHERE id=@id";
 
         public int Create(Examination entity)
         {
@@ -73,9 +75,9 @@ namespace VetClinic.Dao.MySqlDao
                 {
                     Connection.Open();
                     Command = Connection.CreateCommand();
-                    Command.CommandText = CompleteAppointment;
+                    Command.CommandText = CompleteExamination;
                     Command.Parameters.AddWithValue("@id", entity.Id);
-                    Command.Parameters.AddWithValue("@completed", entity.IsCompleted);
+//                    Command.Parameters.AddWithValue("@completed", entity.IsCompleted);
                     return Command.ExecuteNonQuery() > 0;
                 }
             }
@@ -85,7 +87,25 @@ namespace VetClinic.Dao.MySqlDao
             }
         }
 
-        public bool DeleteById(int id) => throw new NotImplementedException();
+        public bool DeleteById(int id)
+        {
+            Connection = null;
+            Command = null;
+            Reader = null;
+
+            try
+            {
+                using (Connection = new MySqlConnection(MySqlUtils.ConnectionString))
+                {
+                    Connection.Open();
+                    Command = Connection.CreateCommand();
+                    Command.CommandText = DeleteExamination;
+                    Command.Parameters.AddWithValue("@id", id);
+                    return Command.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception) { return false; }
+        }
 
         public List<Examination> GetAll()
         {
@@ -245,10 +265,15 @@ namespace VetClinic.Dao.MySqlDao
 
         private static readonly string SelectAllServicesExaminationByExamination = "SELECT * FROM examinationservice WHERE examination=@id";
         private static readonly string SelectAllPrescriptionByExamination = "SELECT * FROM prescription WHERE examination=@id";
-        private static readonly string InsertExaminationService = "INSRT INTO examinationservice(examination, service, quantity, cost) VALUES (@exam, @service, @quantity, @cost)";
+
+        private static readonly string InsertExaminationService = "INSERT INTO examinationservice(examination, service, quantity, cost) VALUES (@exam, @service, @quantity, @cost)";
         private static readonly string InsertPrescription = "INSERT INTO prescription(examination, medicine, name, dose, frequency, start, duration, instructions) VALUES (@exam, @medicine, @name, @dose, @frequency, @start, @duration, @instructions)";
+
         private static readonly string UpdateExaminationServiceQuery = "UPDATE examinationservice SET quantity=@quantity, cost=@cost WHERE examination=@exam AND service=@service";
         private static readonly string UpdatePrescriptionQuery = "UPDATE prescription SET name=@name, dose=@dose, fequency=@frequency, start=@start, duration=@duration, instructions=@instructions WHERE examination=@exam AND medicine=@medicine";
+
+        private static readonly string DeleteExaminationServiceQuery = "DELETE FROM examinationservice WHERE examination=@exam AND service=@service";
+        private static readonly string DeletePrescriptionQuery = "DELETE FROM prescription WHERE examination=@exam AND medicine=@medicine";
 
         public List<ExaminationService> GetAllSevicesFromExamination(int id)
         {
@@ -440,6 +465,116 @@ namespace VetClinic.Dao.MySqlDao
             {
                 return false;
             }
+        }
+
+        public bool DeleteExaminationService(ExaminationService examinationService)
+        {
+            Connection = null;
+            Command = null;
+            Reader = null;
+
+            try
+            {
+                using (Connection = new MySqlConnection(MySqlUtils.ConnectionString))
+                {
+                    Connection.Open();
+                    Command = Connection.CreateCommand();
+                    Command.CommandText = DeleteExaminationServiceQuery;
+                    Command.Parameters.AddWithValue("@exam", examinationService.Examination);
+                    Command.Parameters.AddWithValue("@service", examinationService.Service.Id);
+
+                    return Command.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception) { return false; }
+        }
+
+        public bool DeletePrescription(Prescription prescription)
+        {
+            Connection = null;
+            Command = null;
+            Reader = null;
+
+            try
+            {
+                using (Connection = new MySqlConnection(MySqlUtils.ConnectionString))
+                {
+                    Connection.Open();
+                    Command = Connection.CreateCommand();
+                    Command.CommandText = DeletePrescriptionQuery;
+                    Command.Parameters.AddWithValue("@exam", prescription.Examination);
+                    Command.Parameters.AddWithValue("@medicine", prescription.Medicine.Id);
+
+                    return Command.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception) { return false; }
+        }
+
+        private static readonly string InsertBillQuery = "INSERT INTO bill(totalprice, timestamp, payment, examination, user) VALUES(@price, @timestamp, @payment, @exam, @owner)";
+        private static readonly string GetBillQuery = "SELECT * FROM bill WHERE examination=@exam";
+
+        public bool InsertBill(Bill bill)
+        {
+            Connection = null;
+            Command = null;
+            Reader = null;
+
+            try
+            {
+                using (Connection = new MySqlConnection(MySqlUtils.ConnectionString))
+                {
+                    Connection.Open();
+                    Command = Connection.CreateCommand();
+                    Command.CommandText = InsertBillQuery;
+                    Command.Parameters.AddWithValue("@price", bill.Price);
+                    Command.Parameters.AddWithValue("@timestamp", DateTime.Now);
+                    Command.Parameters.AddWithValue("@payment", bill.Payment);
+                    Command.Parameters.AddWithValue("@exam", bill.Examination.Id);
+                    Command.Parameters.AddWithValue("@owner", bill.Owner.Id);;
+
+                    return Command.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception) { return false; }
+        }
+
+        public Bill? GetBillForExamination(Examination examination)
+        {
+            Connection = null;
+            Command = null;
+            Reader = null;
+
+            Bill? bill = null;
+            try
+            {
+                using (Connection = new MySqlConnection(MySqlUtils.ConnectionString))
+                {
+                    Connection.Open();
+                    Command = Connection.CreateCommand();
+                    Command.CommandText = GetBillQuery;
+                    Command.Parameters.AddWithValue("@exam", examination.Id);
+                    Reader = Command.ExecuteReader();
+
+                    if (Reader.Read())
+                    {
+                        bill = new Bill()
+                        {
+                            Id = Reader.GetInt32("id"),
+                            Timestamp = Reader.GetDateTime("timestamp"),
+                            Price = Reader.GetDecimal("totalprice"),
+                            Payment = Reader.GetString("payment"),
+                            Examination = examination,
+                            Owner = OwnerDao.GetById(Reader.GetInt32("user"))
+                        };
+                    }
+
+                    Reader.Close();
+                }
+            }
+            catch (Exception) { }
+
+            return bill;
         }
     }
 }
